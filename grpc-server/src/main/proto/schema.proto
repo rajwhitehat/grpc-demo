@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+option java_package = "com.demo.schema";
+
+
+message EmployeeRequest{
+int32 emp_id=1;
+string emp_name = 2;
+string gender = 3;
+int32 age=4;
+}
+
+message EmployeeResponse{
+int32 emp_id=1;
+string emp_name = 2;
+string gender = 3;
+int32 age=4;
+}
+
+
+service EmployeeService{
+
+//unary
+rpc getEmployeeById(EmployeeRequest) returns (EmployeeResponse){};
+
+//server streaming
+rpc getEmployeeByGender(EmployeeRequest) returns (stream EmployeeResponse){};
+
+
+//client streaming
+rpc getOldestEmployee(stream EmployeeResponse) returns (EmployeeResponse){};
+
+}
